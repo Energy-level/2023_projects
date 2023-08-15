@@ -4,9 +4,7 @@ import datetime
 import wikipedia #pip install wikipedia
 import webbrowser
 import os
-import smtplib
 import requests  
-import threading  
 import time
 
 engine = pyttsx3.init('sapi5')
@@ -19,6 +17,7 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
+Warning=0
 #for greeting
 def wishMe():
     hour = int(datetime.datetime.now().hour)
@@ -31,30 +30,39 @@ def wishMe():
     else:
         speak("Good Evening!")  
 
-    speak("I am Jarvis Sir. Please tell me how may I help you")
-
-#for weather
-def get_hourly_weather_data():
-    api_key = "15efa7eab9601230f35e572077b8d6f9"  
-    city_id = "524901"  
-    while True:  
-        data = get_weather_data(api_key, city_id)  
-        report = create_weather_report(data)  
-        speak(report)  
-        break
+    speak("I am Jarvis Sir. Please tell me how may I help you")     
 
 #for process response data
 def create_weather_report(data):  
     report = "Weather Report:\n"  
     city = data["name"]  
     report += f"City: {city}\n"  
-    temperature = data["main"]["temp"]  
+    temperature = data["main"]["temp"]
+    warning=int(temperature)  
+    print(warning)
     report += f"Temperature: {temperature}°C\n"  
     humidity = data["main"]["humidity"]  
     report += f"Humidity: {humidity}%\n"  
     wind_speed = data["wind"]["speed"]  
     report += f"Wind Speed: {wind_speed} m/s\n"  
-    return report
+    li=[]
+    li.append(report)
+    li.append(temperature)
+    return li
+
+#for weather
+def get_hourly_weather_data():
+    api_key = "15efa7eab9601230f35e572077b8d6f9"  
+    city_id = "524901"    
+    data = get_weather_data(api_key, city_id)  
+    report = create_weather_report(data)  
+    speak(report[0]) 
+    if(report[1]<10):
+        speak("please wear the sweater and gloves sir climate too cold")
+    elif(report[1]>30):
+        speak("Sir climate is too hot kindly i request to drink lots of water and take more liquid foods sir stay hydrated and healthy")
+    else:
+        speak("Climate is good make a vacation sir and enjoy the outdoor")
 
 #to get weather data     
 def get_weather_data(api_key, city_id):  
@@ -124,10 +132,8 @@ if __name__ == "__main__":
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
-
-        elif 'the climate':
-            thread = threading.Thread(target=get_hourly_weather_data)  
-            thread.start()
+        elif 'the climate' in query:
+            get_hourly_weather_data()
         elif 'stop' in query:
             speak("bye take care sir............")
             break
