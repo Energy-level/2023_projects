@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>home</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="stylesheet" href="{% static 'style2.css'%}">
+</head>
+<body>
+    {% for message in messages %}
+    <div class="alert alert-{{meassage.tags}} alert-dismissible fade show" role="alert">
+        <strong>Message</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" area-label="close">
+        <span area-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %} 
+    <br>
+    {% if user.is_authenticated %} 
+    <h2 style="color:crimson">hello {{fname}}</h2>
+    <h3 style="color:blue">you'r successfully logined</h3>
+    <a href="signout"><input type="button" value="signout"></a>
+    {% else %}
+        <div class="container1">
+            <div class="container1-1">   
+                <h1>Welcome to the travello</h1>
+            </div>
+            <a href="signup1"><button class="bt1">SignUp</button></a>
+            <a href="signin1"><button class="bt1">SignIn</button></a>
+            <br><br><br>
+            <p>If you already registered? signin</p>
+        </div>
+    {% endif %}
+</body>
+</html>

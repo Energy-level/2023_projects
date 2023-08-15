@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>sigin</title>
+    
+</head>
+<body>
+    {% for message in messages %}
+    <div class="alert alert-{{meassage.tags}} alert-dismissible fade show" role="alert">
+        <strong>Message</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" area-label="close">
+        <span area-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <h1>Please SignIn</h1><br><br>
+    <div class="container">
+    <form action="signin1" method="post">
+        {% csrf_token %}
+        <br><br>
+        UserName: <input type="text" name="use" placeholder="enter the username"><br><br><br>
+        password: <input type="password" name="pas" placeholder="enter the password"><br><br><br><br>
+        <input type="submit" value="login">
+    </form>
+    </div>
+</body>
+</html>

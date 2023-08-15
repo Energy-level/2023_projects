@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style2.css'%}">
+    <title>signup</title>
+</head>
+<body>
+    {% for message in messages %}
+    <div class="alert alert-{{meassage.tags}} alert-dismissible fade show" role="alert">
+        <strong>Message</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" area-label="close">
+        <span area-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %} 
+    <h1>welcome please signup</h1>
+    <br>
+    <div class="container2">
+    <form action="signup1" method="post">
+        {% csrf_token %}
+        UserName: <input type="text" name="uid" placeholder="enter the username"><br><br>
+        FirstName: <input type="text" name="fname" placeholder="enter the firstname"><br><br>
+        LastName: <input type="text" name="lname" placeholder="enter the lastname"><br><br>
+        Email: <input type="email" name="email1" placeholder="enter the email id"><br><br>
+        password: <input type="password" name="pass1" placeholder="enter the password"><br><br>
+        <input type="submit">
+    </form>
+    </div>
+</body>
+</html>

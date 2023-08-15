@@ -1,0 +1,33 @@
+.body{
+    background-color: floralwhite;
+}
+.container1{
+    background-color: rgb(223, 165, 115);
+    width: 700px;
+    height: 500px;
+    text-align: center;
+    border-radius: 40px;
+    margin-left: 26%;
+    margin-top: 10px;
+    padding-top: 10px;
+    box-shadow: 5px 5px rgb(12, 12, 12);
+}
+.container1>.container1-1{
+    margin-top: 10px;
+    height: 60px;
+    background-color: azure;
+}
+.bt1:hover{
+    background-color: rgb(162, 148, 116);
+}
+.bt1{
+    margin-top: 70px;
+    border-radius: 20px;
+    width:500px;
+    height: 40px;
+}
+.bt2{
+    border-radius: 20px;
+    width:500px;
+    height: 40px;
+}
